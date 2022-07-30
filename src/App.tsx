@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { RouteType } from "./types/types";
+import BehaviourTab from "./components/BehaviourTab";
+import AudienceTab from "./components/AudienceTab";
+import NavigationBar from "./components/NavigationBar";
 
-function App() {
+const AppContainer = styled.div`
+  width: 80%;
+  margin: 0 auto;
+`;
+
+const App = () => {
+  const [route, setRoute] = useState(RouteType.BEHAVIOUR);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContainer>
+      <NavigationBar route={route} setRoute={setRoute} />
+      {route === RouteType.BEHAVIOUR && <BehaviourTab />}
+      {route === RouteType.AUDIENCE && <AudienceTab />}
+    </AppContainer>
   );
-}
+};
 
 export default App;
